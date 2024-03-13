@@ -7,27 +7,39 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Eu sou um título de nível 1</h1>
-    <h2>Eu sou um título de nível 2</h2>
-    <p>Eu sou um parágrafo</p>
-    <p>oi</p>
+    <header>
+        <h1 class="titulo">Aula programação Web</h1>
+        <h2>Conteúdo:</h2>
+        <p class="paragraph">primeiras aulas de web</p>
+        <ul id="nav" class="nav-bar">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Categorias</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+        
+    </header>
+   
 
     <!-- isso é um comentário -->
-    <ol>
-        <li>eu sou um item da lista ordenada</li>
-        <li>eu sou outro item da lista ordenada</li>
-        <li>outro item</li>
-    </ol>
+    <div class="container-list">
+        <ol class="list">
+            <li>eu sou um item da lista ordenada</li>
+            <li>eu sou outro item da lista ordenada</li>
+            <li>outro item</li>
+        </ol>
+    </div>
 
-    <ul>
-        <li>eu sou um item da lista não ordenada</li>
-        <li>eu sou outro item da lista não ordenada</li>
-        <li>outro item</li>
-    </ul>
-    
-    <input type="color">
-    <input type="text">
-    <input type="password">
-    <input type="button" value="enviar">
+    <div class="container-list2">
+        <ul class="ul-list">
+            <li>eu sou um item da lista não ordenada</li>
+            <li>eu sou outro item da lista não ordenada</li>
+            <li>outro item</li>
+        </ul>
+    </div>
+    <div class="send">
+        <input type="text" placeholder="Digite seu nome" class="text">
+        <input type="password" placeholder="Digite sua senha" class="password">
+        <input type="button" value="enviar" class="btn-submit">
+    </div>
 </body>
 </html>

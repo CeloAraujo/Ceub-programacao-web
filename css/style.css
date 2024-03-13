@@ -1,4 +1,84 @@
+
 h1{
-    color: red
-    
+    color: purple;
+}
+.nav-bar,
+a{
+    text-decoration: none;
+    list-style: none;
+    color: #000;
+
+}
+
+#nav{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.container-list{
+    background-color: rgb(221, 212, 212);
+    border: 2px solid rgb(12, 12, 12);
+    border-radius: 5px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.container-list li{
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-style: bold;
+}
+
+.titulo,
+.paragraph{
+    text-align: center
+}
+
+.container-list2{
+    background-color: rgb(216, 209, 209);
+    width: 50%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    margin-top:50px;
+    border: 2px solid rgb(12, 12, 12);
+    border-radius: 5px;
+    padding:30px;
+}
+.container-list2 li{
+    list-style: none;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-style: bold;
+}
+
+.send{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.text,
+.password{
+    border-radius: 15px;
+    width: 200px;
+}
+
+.btn-submit{
+    border-radius: 15px;
+    width:55px;
+    color: rgb(255, 255, 255);
+    background-color:#d004eb;
+    transition: 0.5s;
+}
+
+.btn-submit:hover{
+    transition: .5s;
+    background-color: #fff;
+    color: #d004eb;
 }
