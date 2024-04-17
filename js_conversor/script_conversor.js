@@ -41,6 +41,7 @@ botaoLimpar.addEventListener("click", (e) => {
 })
 
 botaoEnviar.addEventListener("click", (e) => {
+    let historicoRecuperado = recuperaHistorico();
 
     let money = document.getElementById("money").value
     if (money === "" || money <= 0) {
@@ -62,7 +63,42 @@ botaoEnviar.addEventListener("click", (e) => {
     let paragrafoResultado = document.getElementById("resultado");
     paragrafoResultado.textContent = simbolo + " " + resultadoConversao.toFixed(2)
     hideResult.classList.remove("hide-div")
+
+    let objetoResultado = {
+        valorDoUsuario: money,
+        valorMoeda1: moeda1,
+        valorMoeda2: moeda2,
+        valorResultado: resultadoConversao
+    }
+    // Converter objeto javascript para texto (json) antes de salvar no localstorage
+    // let objetoResultadoJSON = JSON.stringify(objetoResultado);
+    salvarHistorico(objetoResultado);
 })
+
+function recuperaHistorico(){
+    //vai ate a localstorage e recupera o valor da chave "historico"
+    // localstorage salva string
+    let historico = localStorage.getItem("historico");
+
+    if(!historico){
+        return [];
+    }
+    let historicoObjeto = JSON.parse(historico);
+
+    return historicoObjeto;
+}
+
+function salvarHistorico(resultadoConversao){
+    let historico = recuperaHistorico();
+    historico.push(resultadoConversao);
+
+    localStorage.setItem("historico",JSON.stringify(historico));
+}
+
+function salvarResultadoNoLocalStorage(resultado) {
+
+}
+
 
 valorUsuario.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
@@ -81,3 +117,18 @@ valorUsuario.addEventListener("keypress", (e) => {
     });
     
 })
+
+const botaoAceitaMensagem = document.getElementById("botao-aceita-mensagem");
+botaoAceitaMensagem.addEventListener("click", aceitarMensagem);
+
+if(localStorage.getItem("aceitouCookie") == "1") {
+    console.log("usuario já aceitou os termos e não vou mais mostrar");
+    const divMensagemUsuario = document.getElementById("mensagem-usuario");
+    divMensagemUsuario.classList.add("oculto");
+}
+function aceitarMensagem() {
+    const divMensagemUsuario = document.getElementById("mensagem-usuario");
+    divMensagemUsuario.classList.add("oculto");
+
+    localStorage.setItem("aceitouCookie", "1");
+}
