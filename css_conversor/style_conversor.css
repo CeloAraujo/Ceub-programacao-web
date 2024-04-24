@@ -9,7 +9,19 @@ input{
     padding:.5rem
 }
 body{
-    background: #fdfdfd;
+    background: linear-gradient(90deg, #666 30%, rgb(146, 167, 54) 80%);
+}
+
+button{
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+select{
+    border-radius: 5px;
+}
+input{
+    border-radius: 5px;
 }
 
 #title{
@@ -17,7 +29,8 @@ body{
 }
 #container{
     border: 2px solid rgb(252, 235, 3);
-    margin: 50px auto 50px;
+    border-radius: 5px;
+    margin: 250px auto 50px;
     max-width: 1000px;
     padding: 2rem;
     text-align: center;
@@ -32,7 +45,41 @@ body{
 #submit{
     display: flex;
     margin: 1rem auto;
+    background:linear-gradient(180deg, #555 0%, gold 50%);
+   
+}
 
+#submit:hover{
+    transition: .5s;
+    background: linear-gradient(180deg,gold 0%,#555 90%);
+    color: #fff;
+}
+
+#clear-btn{
+    background-color: rgb(218, 25, 25);
+    
+}
+#clear-btn:hover{
+    background-color: rgb(255, 59, 59);
+    transition: .5s;
+    color: #fff;
+}
+
+#moeda1,
+#moeda2{
+    background-color: gold;
+}
+
+#historico{
+    width: 150px;
+    height: 200px;
+    border: 1px solid #444;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 10px;
+   
 }
 
 .hide{

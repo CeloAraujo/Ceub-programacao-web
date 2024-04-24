@@ -16,6 +16,12 @@ const valoresConversao = {
     }
 }
 
+const relacaoNomesMoedas = {
+    real:"BRL",
+    dolar:"USD",
+    euro: "EUR",
+}
+
 const botaoInverter = document.querySelector("#invert")
 const botaoEnviar = document.querySelector("#submit")
 const botaoLimpar = document.querySelector("#clear-btn")
@@ -41,6 +47,7 @@ botaoLimpar.addEventListener("click", (e) => {
 })
 
 botaoEnviar.addEventListener("click", (e) => {
+    
     let historicoRecuperado = recuperaHistorico();
 
     let money = document.getElementById("money").value
@@ -52,10 +59,19 @@ botaoEnviar.addEventListener("click", (e) => {
     let moeda1 = document.getElementById("moeda1").value
     let moeda2 = document.getElementById("moeda2").value
 
+    console.log(moeda1);
+    console.log(moeda2);
+
+    console.log(relacaoNomesMoedas[moeda1]);
+    console.log(relacaoNomesMoedas[moeda2]);
+
+    
     if (moeda1 === moeda2) {
         alert("As moedas são iguais")
         return;
     }
+
+    let parametrosConversao = buscaConversaoAPI(relacaoNomesMoedas[moeda1],relacaoNomesMoedas[moeda2]);
 
     let simbolo = valoresConversao[moeda2]["simbolo"];
     let resultadoConversao = money * valoresConversao[moeda1][moeda2];
@@ -75,12 +91,12 @@ botaoEnviar.addEventListener("click", (e) => {
     salvarHistorico(objetoResultado);
 })
 
-function recuperaHistorico(){
+function recuperaHistorico() {
     //vai ate a localstorage e recupera o valor da chave "historico"
     // localstorage salva string
     let historico = localStorage.getItem("historico");
 
-    if(!historico){
+    if (!historico) {
         return [];
     }
     let historicoObjeto = JSON.parse(historico);
@@ -88,11 +104,11 @@ function recuperaHistorico(){
     return historicoObjeto;
 }
 
-function salvarHistorico(resultadoConversao){
+function salvarHistorico(resultadoConversao) {
     let historico = recuperaHistorico();
     historico.push(resultadoConversao);
 
-    localStorage.setItem("historico",JSON.stringify(historico));
+    localStorage.setItem("historico", JSON.stringify(historico));
 }
 
 function salvarResultadoNoLocalStorage(resultado) {
@@ -105,7 +121,7 @@ valorUsuario.addEventListener("keypress", (e) => {
         e.preventDefault();
         botaoEnviar.click();
     }
-    if(e.ctrlKey ==true && e.code=="KeyI"){
+    if (e.ctrlKey == true && e.code == "KeyI") {
         e.preventDefault();
         botaoInverter.click()
     }
@@ -115,13 +131,13 @@ valorUsuario.addEventListener("keypress", (e) => {
             botaoLimpar.click();
         }
     });
-    
+
 })
 
 const botaoAceitaMensagem = document.getElementById("botao-aceita-mensagem");
 botaoAceitaMensagem.addEventListener("click", aceitarMensagem);
 
-if(localStorage.getItem("aceitouCookie") == "1") {
+if (localStorage.getItem("aceitouCookie") == "1") {
     console.log("usuario já aceitou os termos e não vou mais mostrar");
     const divMensagemUsuario = document.getElementById("mensagem-usuario");
     divMensagemUsuario.classList.add("oculto");
@@ -131,4 +147,37 @@ function aceitarMensagem() {
     divMensagemUsuario.classList.add("oculto");
 
     localStorage.setItem("aceitouCookie", "1");
+}
+
+async function buscaConversaoAPI (moedaOrigem,moedaDestino) {
+
+let urlApi="https://economia.awesomeapi.com.br/last/";
+
+urlApi = urlApi + moedaOrigem + "-"+ moedaDestino;
+
+console.log(urlApi);
+
+
+
+   let responseApi = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL").then(function(response){
+        if(response.status == 200){
+            console.log("Chamada feita com sucesso")
+        }
+        return response.json();
+
+    }).then(function(data){
+        let objetoJson = JSON.stringify(data);
+        let responseApi
+        console.log(data[moedaOrigem+moedaDestino]["ask"]);
+        console.log(objetoJson);
+        responseApi=data[moedaOrigem+moedaDestino]["ask"];
+        // return data;
+        console.log(data);
+
+    }).catch(function(error){
+
+        console.log(error);
+    })
+    console.log("Antes funcao principal"+responseApi);
+    return responseApi;
 }
